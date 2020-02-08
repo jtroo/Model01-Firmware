@@ -251,9 +251,9 @@ KEYMAPS(
 
   [MOUSE] =  KEYMAP_STACKED
   (___,                Key_F1,            Key_F2,           Key_F3,            Key_F4,           Key_F5,          XXX,
-   XXX    ,            Key_mouseScrollUp, Key_mouseScrollL, ___/* key hold */, Key_mouseScrollR, Key_mouseWarpNE, XXX,
+   XXX    ,            Key_mouseScrollUp, Key_mouseBtnP,    ___/* key hold */, Key_mouseBtnN,    Key_mouseWarpNE, XXX,
    XXX     ,           Key_mouseScrollDn, Key_mouseBtnL,    Key_mouseBtnM,     Key_mouseBtnR,    Key_mouseBtnM,
-   LockLayer(PRIMARY), XXX            ,   Key_mouseBtnP,    Key_mouseBtnN,     Key_mouseWarpSW,  Key_mouseWarpSE, XXX,
+   LockLayer(PRIMARY), XXX            ,   Key_mouseScrollL, Key_mouseScrollR,  Key_mouseWarpSW,  Key_mouseWarpSE, XXX,
    XXX, XXX, XXX, XXX,
    XXX,
 
