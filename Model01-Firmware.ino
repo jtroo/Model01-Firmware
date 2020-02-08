@@ -190,10 +190,10 @@ KEYMAPS(
   /*  ShiftToLayer(FUNCTION)), */
 
   [PRIMARY] = KEYMAP_STACKED
-  (Key_Backtick, Key_1,         Key_2,                  Key_3,                       Key_4,         Key_5, Key_LEDEffectNext,
-   Key_Tab     , Key_Quote,     Key_Comma,              LT(ARROWS_FUNCTION, Period), MT(CtlSft, P), Key_Y, Key_Delete,
-   Key_PageUp,   LT(NUMPAD, A), LT(ARROWS_FUNCTION, O), MT(Meh, E),                  LT(MISC, U),   Key_I,
-   Key_PageDown, Key_Semicolon, Key_Q,                  Key_J,                       Key_K,         Key_X, Key_Escape,
+  (Key_Backtick,        Key_1,         Key_2,                  Key_3,             Key_4,         Key_5, Key_LEDEffectNext,
+   Key_Tab     ,        Key_Quote,     Key_Comma,              LT(MOUSE, Period), MT(CtlSft, P), Key_Y, Key_Delete,
+   LCTRL(Key_CapsLock), LT(NUMPAD, A), LT(ARROWS_FUNCTION, O), MT(Meh, E),        LT(MISC, U),   Key_I,
+   LockLayer(MOUSE),    Key_Semicolon, Key_Q,                  Key_J,             Key_K,         Key_X, LockLayer(NOOB),
    Key_LeftAlt,  Key_Spacebar,  Key_LeftShift, Key_LeftControl,
    Key_LeftGui,
 
@@ -250,12 +250,12 @@ KEYMAPS(
    ___),
 
   [MOUSE] =  KEYMAP_STACKED
-  (___,      Key_F1,           Key_F2,        Key_F3,            Key_F4,        Key_F5,           Key_CapsLock,
-   Key_Tab,  ___,              Key_mouseUp,   ___/* key hold */, Key_mouseBtnR, Key_mouseWarpNW, Key_mouseWarpNE,
-   Key_Home, Key_mouseL,       Key_mouseBtnL, Key_mouseR,        Key_mouseBtnR, Key_mouseBtnM,
-   Key_End,  Key_PrintScreen,  Key_Insert,    ___,               Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
-   ___, Key_Delete, ___, ___,
-   ___,
+  (___,                Key_F1,            Key_F2,           Key_F3,            Key_F4,           Key_F5,          XXX,
+   XXX    ,            Key_mouseScrollUp, Key_mouseScrollL, ___/* key hold */, Key_mouseScrollR, Key_mouseWarpNE, XXX,
+   XXX     ,           Key_mouseScrollDn, Key_mouseBtnL,    Key_mouseBtnM,     Key_mouseBtnR,    Key_mouseBtnM,
+   LockLayer(PRIMARY), XXX            ,   Key_mouseBtnP,    Key_mouseBtnN,     Key_mouseWarpSW,  Key_mouseWarpSE, XXX,
+   XXX, XXX, XXX, XXX,
+   XXX,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
    Consumer_PlaySlashPause,    Consumer_ScanNextTrack, Key_LeftCurlyBracket,     Key_mouseUp,              Key_LeftBracket, Key_RightBracket, Key_F12,
@@ -265,10 +265,10 @@ KEYMAPS(
    ___),
 
   [NOOB] = KEYMAP_STACKED
-  (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
-   Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
-   Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G,
-   Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
+  (LockLayer(PRIMARY), Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+   Key_Backtick,       Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
+   Key_PageUp,         Key_A, Key_S, Key_D, Key_F, Key_G,
+   Key_PageDown,       Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
    Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift,
    ShiftToLayer(ARROWS_FUNCTION),
 
