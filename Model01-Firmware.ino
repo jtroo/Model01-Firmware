@@ -19,6 +19,7 @@
 #include "Kaleidoscope-EEPROM-Settings.h"
 #include "Kaleidoscope-EEPROM-Keymap.h"
 
+
 // Support for communicating with the host via a simple Serial protocol
 #include "Kaleidoscope-FocusSerial.h"
 
@@ -136,36 +137,7 @@ enum { MACRO_VERSION_INFO,
   * Similarly, a key defined as 'LockLayer(NUMPAD)' will switch to NUMPAD when tapped.
   */
 
-/**
-  * Layers are "0-indexed" -- That is the first one is layer 0. The second one is layer 1.
-  * The third one is layer 2.
-  * This 'enum' lets us use names like QWERTY, FUNCTION, and NUMPAD in place of
-  * the numbers 0, 1 and 2.
-  *
-  */
-
-enum { PRIMARY, MISC, NUMPAD, ARROWS_FUNCTION, MOUSE, NOOB }; // layers
-
-
-/**
-  * To change your keyboard's layout from QWERTY to DVORAK or COLEMAK, comment out the line
-  *
-  * #define PRIMARY_KEYMAP_QWERTY
-  *
-  * by changing it to
-  *
-  * // #define PRIMARY_KEYMAP_QWERTY
-  *
-  * Then uncomment the line corresponding to the layout you want to use.
-  *
-  */
-
-#define PRIMARY_KEYMAP_QWERTY
-// #define PRIMARY_KEYMAP_COLEMAK
-// #define PRIMARY_KEYMAP_DVORAK
-// #define PRIMARY_KEYMAP_CUSTOM
-
-
+enum { PRIMARY, MISC, CHORDS, NUMPAD, ARROWS_FUNCTION, MOUSE, NOOB }; // layers
 
 /* This comment temporarily turns off astyle's indent enforcement
  *   so we can make the keymaps actually resemble the physical key layout better
@@ -174,35 +146,20 @@ enum { PRIMARY, MISC, NUMPAD, ARROWS_FUNCTION, MOUSE, NOOB }; // layers
 
 KEYMAPS(
 
-  /* [PRIMARY] = KEYMAP_STACKED */
-  /* (___,          Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext, */
-  /*  Key_Backtick, Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab, */
-  /*  Key_PageUp,   Key_A, Key_S, Key_D, Key_F, Key_G, */
-  /*  Key_PageDown, Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape, */
-  /*  Key_LeftControl, Key_Backspace, Key_LeftGui, Key_LeftShift, */
-  /*  ShiftToLayer(FUNCTION), */
-
-  /*  M(MACRO_ANY),  Key_6, Key_7, Key_8,     Key_9,         Key_0,         LockLayer(NUMPAD), */
-  /*  Key_Enter,     Key_Y, Key_U, Key_I,     Key_O,         Key_P,         Key_Equals, */
-  /*                 Key_H, Key_J, Key_K,     Key_L,         Key_Semicolon, Key_Quote, */
-  /*  Key_RightAlt,  Key_N, Key_M, Key_Comma, Key_Period,    Key_Slash,     Key_Minus, */
-  /*  Key_RightShift, Key_LeftAlt, Key_Spacebar, Key_RightControl, */
-  /*  ShiftToLayer(FUNCTION)), */
-
   [PRIMARY] = KEYMAP_STACKED
   (Key_Backtick,        Key_1,         Key_2,                  Key_3,             Key_4,         Key_5, Key_LEDEffectNext,
-   Key_Tab     ,        Key_Quote,     Key_Comma,              LT(MOUSE, Period), MT(CtlSft, P), Key_Y, Key_Delete,
-   LCTRL(Key_CapsLock), LT(NUMPAD, A), LT(ARROWS_FUNCTION, O), MT(Meh, E),        LT(MISC, U),   Key_I,
+   Key_Tab     ,        Key_Quote,     Key_Comma,              LT(MOUSE, Period), LT(CHORDS, P), Key_Y, Key_Delete,
+   LCTRL(Key_CapsLock), LT(NUMPAD, A), LT(ARROWS_FUNCTION, O), LT(CHORDS, E),        LT(MISC, U),   Key_I,
    LockLayer(MOUSE),    Key_Semicolon, Key_Q,                  Key_J,             Key_K,         Key_X, LockLayer(NOOB),
-   Key_LeftAlt,  Key_Spacebar,  Key_LeftShift, Key_LeftControl,
+   Key_Spacebar,  Key_LeftShift, Key_LeftControl, Key_LeftAlt,
    Key_LeftGui,
 
    M(MACRO_ANY),     Key_6, Key_7, Key_8, Key_9, Key_0, Key_Backspace,
    Key_LeftBracket,  Key_F, Key_G, Key_C, Key_R, Key_L, Key_Slash,
                      Key_D, Key_H, Key_T, Key_N, Key_S, Key_Minus,
    Key_RightBracket, Key_B, Key_M, Key_W, Key_V, Key_Z, Key_RightControl /* TODO */,
-   CTL_T(Escape), SFT_T(Enter), Key_Equals, Key_Backslash,
-   LT(ARROWS_FUNCTION, Backspace)),
+   Key_Backspace, CTL_T(Escape), SFT_T(Equals), Key_Backslash,
+   LT(ARROWS_FUNCTION, Enter)),
 
   [MISC] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
@@ -219,6 +176,21 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___),
 
+  [CHORDS] =  KEYMAP_STACKED
+  (___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___, ___, ___, ___,
+   ___, ___, ___, ___,
+   ___,
+
+   ___, ___, ___, ___,        ___, ___, ___,
+   ___, ___, ___, LSHIFT(LCTRL(Key_C)),        ___, ___, ___,
+        ___,  LSHIFT(LALT(LCTRL(Key_H))), LSHIFT(LALT(LCTRL(Key_T))), LSHIFT(LALT(LCTRL(Key_N))), LSHIFT(LALT(LCTRL(Key_S))), ___,
+   ___, ___, ___, ___,         LSHIFT(LCTRL(Key_V)), ___, ___,
+   ___, ___, ___, ___,
+   ___),
+
   [NUMPAD] =  KEYMAP_STACKED
   (___, ___, ___, ___, ___, ___, ___,
    ___, ___, ___, ___, ___, ___, ___,
@@ -227,8 +199,8 @@ KEYMAPS(
    ___, ___, ___, ___,
    ___,
 
-   M(MACRO_VERSION_INFO),  ___, Key_7, Key_8,              Key_9,      Key_KeypadSubtract, Key_KeypadNumLock,
-   ___,                    ___, Key_4, Key_5,              Key_6,      Key_KeypadAdd,      ___,
+   M(MACRO_VERSION_INFO),  ___, Key_7, Key_8,              Key_9,      Key_KeypadSubtract, Key_Backspace,
+   ___,                    ___, Key_4, Key_5,              Key_6,      Key_KeypadAdd,      Key_KeypadNumLock,
                            ___, Key_1, Key_2,              Key_3,      Key_Equals,         ___,
    ___,                    ___, Key_0, Key_KeypadMultiply, Key_Period, Key_KeypadDivide,   Key_Enter,
    ___, ___, ___, ___,
@@ -239,7 +211,7 @@ KEYMAPS(
    Key_Tab,  ___,              Key_mouseUp, ___,        Key_mouseBtnR, Key_mouseWarpEnd, Key_mouseWarpNE,
    Key_Home, Key_mouseL,       Key_mouseDn, Key_mouseR, Key_mouseBtnL, Key_mouseWarpNW,
    Key_End,  Key_PrintScreen,  Key_Insert,  ___,        Key_mouseBtnM, Key_mouseWarpSW,  Key_mouseWarpSE,
-   ___, Key_Delete, ___, ___,
+   ___, ___, ___, ___,
    ___,
 
    Consumer_ScanPreviousTrack, Key_F6,                 Key_F7,                   Key_F8,                   Key_F9,          Key_F10,          Key_F11,
@@ -253,7 +225,7 @@ KEYMAPS(
   (___,                Key_F1,            Key_F2,           Key_F3,            Key_F4,           Key_F5,          XXX,
    XXX    ,            Key_mouseScrollUp, Key_mouseBtnP,    ___/* key hold */, Key_mouseBtnN,    Key_mouseWarpNE, XXX,
    XXX     ,           Key_mouseScrollDn, Key_mouseBtnL,    Key_mouseBtnM,     Key_mouseBtnR,    Key_mouseBtnM,
-   LockLayer(PRIMARY), XXX            ,   Key_mouseScrollL, Key_mouseScrollR,  Key_mouseWarpSW,  Key_mouseWarpSE, XXX,
+   UnlockLayer(MOUSE), XXX            ,   Key_mouseScrollL, Key_mouseScrollR,  Key_mouseWarpSW,  Key_mouseWarpSE, XXX,
    XXX, XXX, XXX, XXX,
    XXX,
 
@@ -265,7 +237,7 @@ KEYMAPS(
    ___),
 
   [NOOB] = KEYMAP_STACKED
-  (LockLayer(PRIMARY), Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
+  (UnlockLayer(NOOB), Key_1, Key_2, Key_3, Key_4, Key_5, Key_LEDEffectNext,
    Key_Backtick,       Key_Q, Key_W, Key_E, Key_R, Key_T, Key_Tab,
    Key_PageUp,         Key_A, Key_S, Key_D, Key_F, Key_G,
    Key_PageDown,       Key_Z, Key_X, Key_C, Key_V, Key_B, Key_Escape,
@@ -309,12 +281,12 @@ static void anyKeyMacro(uint8_t keyState) {
   static Key lastKey;
   bool toggledOn = false;
   if (keyToggledOn(keyState)) {
-    lastKey.setKeyCode(Key_A.getKeyCode() + (uint8_t)(millis() % 36));
+    lastKey.keyCode = Key_A.keyCode + (uint8_t)(millis() % 36);
     toggledOn = true;
   }
 
   if (keyIsPressed(keyState))
-    Kaleidoscope.hid().keyboard().pressKey(lastKey, toggledOn);
+    kaleidoscope::hid::pressKey(lastKey, toggledOn);
 }
 
 
@@ -365,15 +337,19 @@ static kaleidoscope::plugin::LEDSolidColor solidViolet(130, 0, 120);
 void toggleLedsOnSuspendResume(kaleidoscope::plugin::HostPowerManagement::Event event) {
   switch (event) {
   case kaleidoscope::plugin::HostPowerManagement::Suspend:
-    LEDControl.disable();
+    LEDControl.set_all_leds_to({0, 0, 0});
+    LEDControl.syncLeds();
+    LEDControl.paused = true;
     break;
   case kaleidoscope::plugin::HostPowerManagement::Resume:
-    LEDControl.enable();
+    LEDControl.paused = false;
+    LEDControl.refreshAll();
     break;
   case kaleidoscope::plugin::HostPowerManagement::Sleep:
     break;
   }
 }
+
 
 /** hostPowerManagementEventHandler dispatches power management events (suspend,
  * resume, and sleep) to other functions that perform action based on these
@@ -571,8 +547,13 @@ void setup() {
   // many editable layers we have (see above).
   ColormapEffect.max_layers(5);
 
-  Qukeys.setHoldTimeout(200);
-  Qukeys.setOverlapThreshold(10);
+  MouseKeys.accelDelay = 17;
+  MouseKeys.accelSpeed = 2;
+  MouseKeys.setSpeedLimit(1000);
+  MouseKeys.wheelDelay = 17;
+
+  Qukeys.setHoldTimeout(650);
+  Qukeys.setOverlapThreshold(0);
   Qukeys.activate();
 }
 
